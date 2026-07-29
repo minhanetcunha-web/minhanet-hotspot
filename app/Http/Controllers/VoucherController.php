@@ -2,69 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VoucherStoreRequest;
 use App\Models\Voucher;
-use App\Models\Hotspot;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use App\Services\MikrotikApi;
+use App\Services\VoucherService;
+use Illuminate\View\View;
 
 class VoucherController extends Controller
 {
-    protected $mikrotik;
+    protected VoucherService $voucherService;
 
-    public function __construct(MikrotikApi $mikrotik)
+    public function __construct(VoucherService $voucherService)
     {
-        $this->mikrotik = $mikrotik;
+        $this->voucherService = $voucherService;
     }
 
-    public function index()
+    public function index(): View
     {
         $vouchers = Voucher::latest()->get();
 
         return view('vouchers.index', compact('vouchers'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('vouchers.create');
     }
 
-    public function store(Request $request)
+    public function store(VoucherStoreRequest $request)
     {
-        $request->validate([
-            'perfil' => 'required',
-            'valor' => 'required|numeric',
-        ]);
+        try {
+            $this->voucherService->criarVoucher(
+                $request->input('perfil'),
+                (float) $request->input('valor')
+            );
 
-        $codigo = strtoupper(Str::random(8));
-
-        Voucher::create([
-            'codigo' => $codigo,
-            'perfil' => $request->perfil,
-            'valor' => $request->valor,
-            'status' => 'pendente',
-        ]);
-
-        $hotspot = Hotspot::first();
-
-        if (!$hotspot) {
             return redirect()
                 ->route('vouchers')
-                ->with('error', 'Nenhum MikroTik cadastrado.');
+                ->with('success', 'Voucher criado com sucesso!');
+        } catch (\RuntimeException $e) {
+            return redirect()
+                ->route('vouchers')
+                ->with('error', $e->getMessage());
         }
-
-        $this->mikrotik->criarUsuarioHotspot(
-            $hotspot->ip,
-            $hotspot->porta,
-            $hotspot->usuario,
-            $hotspot->senha,
-            $codigo,
-            '123456',
-            $request->perfil
-        );
-
-        return redirect()
-            ->route('vouchers')
-            ->with('success', 'Voucher criado com sucesso!');
     }
 }

@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    color-scheme: dark;
+}
+
+body {
+    @apply bg-slate-950 text-slate-800 antialiased;
+    background-image: radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(129, 140, 248, 0.16), transparent 34%),
+        linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
+}
+
+::selection {
+    @apply bg-cyan-500/30 text-slate-900;
+}
+
+@layer components {
+    .glass-card {
+        @apply rounded-[1.75rem] border border-white/70 bg-white/80 shadow-[0_24px_80px_-24px_rgba(15,23,42,0.35)] backdrop-blur-xl;
+    }
+
+    .soft-pill {
+        @apply inline-flex items-center rounded-full bg-cyan-100 px-3 py-1 text-sm font-medium text-cyan-700;
+    }
+
+    .hero-ring {
+        @apply rounded-[2rem] border border-cyan-100/80 bg-gradient-to-br from-cyan-50/80 via-white to-indigo-50/70 shadow-[0_20px_80px_-24px_rgba(59,130,246,0.35)];
+    }
+}

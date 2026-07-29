@@ -1,21 +1,24 @@
-<?php
+?php
 
 namespace App\Http\Controllers;
 
+use App\Services\PortalService;
 use Illuminate\Http\Request;
-use App\Services\MercadoPagoService;
-use App\Services\MikrotikApi;
-use App\Models\Pagamento;
 
 class PortalController extends Controller
 {
+    protected PortalService $portalService;
+
+    public function __construct(PortalService $portalService)
+    {
+        $this->portalService = $portalService;
+    }
+
     public function pagar(Request $request)
     {
-        $mercadoPago = new MercadoPagoService();
-
-        $pagamento = $mercadoPago->criarPix(
-            $request->plano,
-            $request->valor
+        $pagamento = $this->portalService->criarPagamento(
+            (string) $request->plano,
+            (float) $request->valor
         );
 
         return view('wifi.pagamento', [
@@ -24,18 +27,11 @@ class PortalController extends Controller
             'pagamento' => $pagamento,
         ]);
     }
-    
+
     public function webhook(Request $request)
-{
-    \Log::info('Webhook Mercado Pago', $request->all());
-
-    $mikrotik = new MikrotikApi();
-
-    // Aqui vamos criar o voucher automaticamente.
-    // Na próxima etapa substituiremos por dados vindos do pagamento.
-
-    return response()->json([
-        'status' => 'ok'
-    ]);
-}
+    {
+        return response()->json(
+            $this->portalService->processarWebhook($request->all())
+        );
+    }
 }
