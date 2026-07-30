@@ -13,7 +13,7 @@
 
     <div class="glass-card overflow-hidden">
         <div class="border-b border-slate-100 bg-slate-50/70 px-6 py-4">
-            <p class="text-sm font-medium text-slate-500">VisualizaÃ§Ã£o da base cadastrada</p>
+            <p class="text-sm font-medium text-slate-500">Visualização da base cadastrada</p>
         </div>
         <div class="overflow-x-auto p-6">
             <table class="min-w-full divide-y divide-slate-200">
@@ -30,8 +30,8 @@
                     @forelse($clientes as $cliente)
                         <tr class="text-sm text-slate-700">
                             <td class="px-3 py-4 font-medium text-slate-900">{{ $cliente->nome }}</td>
-                            <td class="px-3 py-4">{{ $cliente->telefone ?? 'â€”' }}</td>
-                            <td class="px-3 py-4">{{ $cliente->plano ?? 'â€”' }}</td>
+                            <td class="px-3 py-4">{{ $cliente->telefone ?? '—' }}</td>
+                            <td class="px-3 py-4">{{ $cliente->plano ?? '—' }}</td>
                             <td class="px-3 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">{{ $cliente->status ?? 'Ativo' }}</span></td>
                         </tr>
                     @empty

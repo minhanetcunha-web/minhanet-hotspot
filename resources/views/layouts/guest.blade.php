@@ -19,19 +19,19 @@
                             MinhaNet Telecom
                         </div>
                         <h1 class="mt-6 text-3xl font-semibold sm:text-4xl">
-                            GestÃ£o inteligente para sua rede Wi-Fi.
+                            Gestão inteligente para sua rede Wi-Fi.
                         </h1>
                         <p class="mt-4 max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
-                            Gerencie clientes, planos, vouchers e pagamentos com uma experiÃªncia moderna, rÃ¡pida e segura.
+                            Gerencie clientes, planos, vouchers e pagamentos com uma experiência moderna, rápida e segura.
                         </p>
                         <div class="mt-8 space-y-3 text-sm text-slate-200">
                             <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/10 px-4 py-3">
-                                <span class="text-lg">âš¡</span>
-                                <span>OperaÃ§Ã£o simples para equipes pequenas e grandes.</span>
+                                <span class="text-lg">⚡</span>
+                                <span>Operação simples para equipes pequenas e grandes.</span>
                             </div>
                             <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/10 px-4 py-3">
-                                <span class="text-lg">ðŸ”’</span>
-                                <span>AutenticaÃ§Ã£o protegida com layout responsivo.</span>
+                                <span class="text-lg">🔒</span>
+                                <span>Autenticação protegida com layout responsivo.</span>
                             </div>
                         </div>
                     </div>

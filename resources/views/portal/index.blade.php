@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex flex-col gap-2">
-            <p class="soft-pill">Portal pÃºblico</p>
+            <p class="soft-pill">Portal público</p>
             <h2 class="text-2xl font-semibold text-slate-900">Acesso para clientes</h2>
-            <p class="text-sm text-slate-600">Escolha o tempo de navegaÃ§Ã£o com uma experiÃªncia moderna e intuitiva.</p>
+            <p class="text-sm text-slate-600">Escolha o tempo de navegação com uma experiência moderna e intuitiva.</p>
         </div>
     </x-slot>
 
@@ -18,7 +18,7 @@
                     <button type="submit" class="flex w-full items-center justify-between rounded-[1.4rem] bg-gradient-to-r {{ $plano['color'] }} p-6 text-left text-white shadow-lg transition hover:-translate-y-1">
                         <div>
                             <p class="text-lg font-semibold">{{ $plano['label'] }}</p>
-                            <p class="mt-1 text-sm text-white/80">Acesso rÃ¡pido para internet</p>
+                            <p class="mt-1 text-sm text-white/80">Acesso rápido para internet</p>
                         </div>
                         <span class="text-xl font-semibold">{{ $plano['valor'] }}</span>
                     </button>

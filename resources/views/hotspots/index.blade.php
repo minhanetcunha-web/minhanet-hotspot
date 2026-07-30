@@ -13,7 +13,7 @@
 
     <div class="glass-card overflow-hidden">
         <div class="border-b border-slate-100 bg-slate-50/70 px-6 py-4">
-            <p class="text-sm font-medium text-slate-500">Roteadores e conexÃµes integradas</p>
+            <p class="text-sm font-medium text-slate-500">Roteadores e conexões integradas</p>
         </div>
         <div class="overflow-x-auto p-6">
             <table class="min-w-full divide-y divide-slate-200">
@@ -22,9 +22,9 @@
                         <th class="px-3 py-3">Nome</th>
                         <th class="px-3 py-3">IP</th>
                         <th class="px-3 py-3">Porta</th>
-                        <th class="px-3 py-3">UsuÃ¡rio</th>
+                        <th class="px-3 py-3">Usuário</th>
                         <th class="px-3 py-3">Status</th>
-                        <th class="px-3 py-3">AÃ§Ãµes</th>
+                        <th class="px-3 py-3">Ações</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">

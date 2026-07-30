@@ -21,7 +21,7 @@
             </div>
         @else
             <div class="mt-8 rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 p-8 text-center text-sm text-slate-600">
-                O QR Code serÃ¡ exibido assim que o pagamento for criado.
+                O QR Code será exibido assim que o pagamento for criado.
             </div>
         @endif
     </div>

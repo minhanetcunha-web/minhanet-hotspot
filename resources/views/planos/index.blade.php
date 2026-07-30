@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <p class="soft-pill">CatÃ¡logo</p>
+                <p class="soft-pill">Catálogo</p>
                 <h2 class="mt-2 text-2xl font-semibold text-slate-900">Planos</h2>
             </div>
             <a href="{{ route('planos.novo') }}" class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:translate-y-[-1px]">
@@ -13,7 +13,7 @@
 
     <div class="glass-card overflow-hidden">
         <div class="border-b border-slate-100 bg-slate-50/70 px-6 py-4">
-            <p class="text-sm font-medium text-slate-500">Planos disponÃ­veis para os clientes</p>
+            <p class="text-sm font-medium text-slate-500">Planos disponíveis para os clientes</p>
         </div>
         <div class="overflow-x-auto p-6">
             <table class="min-w-full divide-y divide-slate-200">
@@ -21,7 +21,7 @@
                     <tr class="text-left text-sm font-semibold text-slate-500">
                         <th class="px-3 py-3">Nome</th>
                         <th class="px-3 py-3">Tempo</th>
-                        <th class="px-3 py-3">PreÃ§o</th>
+                        <th class="px-3 py-3">Preço</th>
                         <th class="px-3 py-3">Status</th>
                     </tr>
                 </thead>

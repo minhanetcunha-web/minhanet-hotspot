@@ -26,7 +26,7 @@
             </div>
 
             <div>
-                <label class="mb-2 block text-sm font-semibold text-slate-700">UsuÃ¡rio</label>
+                <label class="mb-2 block text-sm font-semibold text-slate-700">Usuário</label>
                 <input type="text" name="usuario" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100" required>
             </div>
 

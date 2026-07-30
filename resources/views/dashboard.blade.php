@@ -3,9 +3,9 @@
         <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
                 <span class="soft-pill">Painel principal</span>
-                <h2 class="mt-3 text-3xl font-semibold text-slate-900">Bem-vindo Ã  MinhaNet</h2>
+                <h2 class="mt-3 text-3xl font-semibold text-slate-900">Bem-vindo à MinhaNet</h2>
                 <p class="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
-                    Gerencie clientes, planos e acessos com uma experiÃªncia mais moderna e organizada.
+                    Gerencie clientes, planos e acessos com uma experiência mais moderna e organizada.
                 </p>
             </div>
             <a href="{{ route('clientes.novo') }}" class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:translate-y-[-1px]">
@@ -25,10 +25,10 @@
                 @endphp
 
                 @foreach([
-                    ['label' => 'Clientes', 'value' => $clientes, 'icon' => 'ðŸ‘¥', 'tone' => 'from-cyan-500 to-cyan-600'],
-                    ['label' => 'Planos', 'value' => $planos, 'icon' => 'ðŸ“¶', 'tone' => 'from-indigo-500 to-indigo-600'],
-                    ['label' => 'Hotspots', 'value' => $hotspots, 'icon' => 'ðŸ“¡', 'tone' => 'from-fuchsia-500 to-fuchsia-600'],
-                    ['label' => 'Vouchers', 'value' => $vouchers, 'icon' => 'ðŸŽ«', 'tone' => 'from-emerald-500 to-emerald-600'],
+                    ['label' => 'Clientes', 'value' => $clientes, 'icon' => '👥', 'tone' => 'from-cyan-500 to-cyan-600'],
+                    ['label' => 'Planos', 'value' => $planos, 'icon' => '📶', 'tone' => 'from-indigo-500 to-indigo-600'],
+                    ['label' => 'Hotspots', 'value' => $hotspots, 'icon' => '📡', 'tone' => 'from-fuchsia-500 to-fuchsia-600'],
+                    ['label' => 'Vouchers', 'value' => $vouchers, 'icon' => '🎫', 'tone' => 'from-emerald-500 to-emerald-600'],
                 ] as $stat)
                     <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-5">
                         <div class="flex items-center justify-between">
@@ -49,7 +49,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="soft-pill">Atalhos</p>
-                        <h3 class="mt-3 text-xl font-semibold text-slate-900">O que vocÃª pode fazer agora</h3>
+                        <h3 class="mt-3 text-xl font-semibold text-slate-900">O que você pode fazer agora</h3>
                     </div>
                 </div>
 
@@ -81,11 +81,11 @@
                         <p class="mt-2 text-xl font-semibold text-slate-900">Em funcionamento</p>
                     </div>
                     <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4">
-                        <p class="text-sm font-medium text-slate-500">PrÃ³ximo passo</p>
+                        <p class="text-sm font-medium text-slate-500">Próximo passo</p>
                         <p class="mt-2 text-xl font-semibold text-slate-900">Adicione novos planos e vouchers.</p>
                     </div>
                     <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4">
-                        <p class="text-sm font-medium text-slate-500">ExperiÃªncia</p>
+                        <p class="text-sm font-medium text-slate-500">Experiência</p>
                         <p class="mt-2 text-xl font-semibold text-slate-900">Interface moderna e responsiva.</p>
                     </div>
                 </div>

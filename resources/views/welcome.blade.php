@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>MinhaNet â€” GestÃ£o de Wi-Fi</title>
+    <title>MinhaNet — Gestão de Wi-Fi</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-slate-950 font-sans text-slate-800 antialiased">
@@ -16,7 +16,7 @@
                         <span class="h-2.5 w-2.5 rounded-full bg-cyan-500"></span>
                         MinhaNet Telecom
                     </div>
-                    <h1 class="mt-3 text-2xl font-semibold text-slate-900 sm:text-3xl">Mais velocidade, mais controle e mais automaÃ§Ã£o.</h1>
+                    <h1 class="mt-3 text-2xl font-semibold text-slate-900 sm:text-3xl">Mais velocidade, mais controle e mais automação.</h1>
                 </div>
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('login') }}" class="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Entrar</a>
@@ -27,10 +27,10 @@
             <main class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
                 <section class="hero-ring p-6 sm:p-8">
                     <div class="inline-flex items-center rounded-full bg-white/70 px-3 py-1 text-sm font-medium text-slate-600">
-                        GestÃ£o completa para operaÃ§Ã£o de Wi-Fi
+                        Gestão completa para operação de Wi-Fi
                     </div>
                     <h2 class="mt-5 text-3xl font-semibold text-slate-900 sm:text-4xl">
-                        Transforme a sua operaÃ§Ã£o em um painel profissional.
+                    Transforme a sua operação em um painel profissional.
                     </h2>
                     <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600">
                         Centralize clientes, planos, vouchers e hotspots em um ambiente elegante, responsivo e preparado para crescer.
@@ -50,11 +50,11 @@
                         </div>
                         <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4">
                             <p class="font-semibold text-slate-900">Hotspots e vouchers</p>
-                            <p class="mt-1">Integre roteadores MikroTik e emita vouchers de forma prÃ¡tica.</p>
+                            <p class="mt-1">Integre roteadores MikroTik e emita vouchers de forma prática.</p>
                         </div>
                         <div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4">
-                            <p class="font-semibold text-slate-900">Portal pÃºblico</p>
-                            <p class="mt-1">OfereÃ§a uma experiÃªncia moderna para os seus clientes.</p>
+                            <p class="font-semibold text-slate-900">Portal público</p>
+                            <p class="mt-1">Ofereça uma experiência moderna para os seus clientes.</p>
                         </div>
                     </div>
                 </aside>

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <p class="soft-pill">Acesso temporÃ¡rio</p>
+                <p class="soft-pill">Acesso temporário</p>
                 <h2 class="mt-2 text-2xl font-semibold text-slate-900">Vouchers</h2>
             </div>
             <a href="{{ route('vouchers.novo') }}" class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:translate-y-[-1px]">
@@ -19,7 +19,7 @@
             <table class="min-w-full divide-y divide-slate-200">
                 <thead>
                     <tr class="text-left text-sm font-semibold text-slate-500">
-                        <th class="px-3 py-3">CÃ³digo</th>
+                        <th class="px-3 py-3">Código</th>
                         <th class="px-3 py-3">Perfil</th>
                         <th class="px-3 py-3">Valor</th>
                         <th class="px-3 py-3">Status</th>
