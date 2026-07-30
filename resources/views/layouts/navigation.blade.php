@@ -17,25 +17,25 @@
 
             <div class="hidden items-center gap-2 sm:flex">
                 <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    <span class="mr-2">ðŸ </span> Dashboard
+                    <span class="mr-2">🏠</span> Dashboard
                 </x-nav-link>
                 <x-nav-link :href="route('clientes')" :active="request()->routeIs('clientes*')">
-                    <span class="mr-2">ðŸ‘¥</span> Clientes
+                    <span class="mr-2">👥</span> Clientes
                 </x-nav-link>
                 <x-nav-link :href="route('planos')" :active="request()->routeIs('planos*')">
-                    <span class="mr-2">ðŸ“¶</span> Planos
+                    <span class="mr-2">📶</span> Planos
                 </x-nav-link>
                 <x-nav-link :href="route('hotspots')" :active="request()->routeIs('hotspots*')">
-                    <span class="mr-2">ðŸ“¡</span> Hotspots
+                    <span class="mr-2">📡</span> Hotspots
                 </x-nav-link>
                 <x-nav-link :href="route('vouchers')" :active="request()->routeIs('vouchers*')">
-                    <span class="mr-2">ðŸŽ«</span> Vouchers
+                    <span class="mr-2">🎫</span> Vouchers
                 </x-nav-link>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:gap-3">
                 <a href="{{ route('portal') }}" class="rounded-full border border-cyan-200 bg-cyan-50 px-3 py-2 text-sm font-medium text-cyan-700 transition hover:bg-cyan-100">
-                    ðŸŒ Portal
+                    🌐 Portal
                 </a>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
