@@ -1,4 +1,4 @@
-?php
+<?php
 
 use App\Http\Controllers\PortalController;
 use Illuminate\Support\Facades\Route;
