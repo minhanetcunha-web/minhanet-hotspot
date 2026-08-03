@@ -1,63 +1,29 @@
 <x-app-layout>
-
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800">
-            Portal Minha Net
-        </h2>
+        <div class="flex flex-col gap-2">
+            <p class="soft-pill">Portal público</p>
+            <h2 class="text-2xl font-semibold text-slate-900">Acesso para clientes</h2>
+            <p class="text-sm text-slate-600">Escolha o tempo de navegação com uma experiência moderna e intuitiva.</p>
+        </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-xl shadow-lg p-8">
-
-                <h1 class="text-4xl font-bold text-center text-green-600">
-                    Minha Net Telecomunicações
-                </h1>
-
-                <p class="text-center text-gray-600 mt-3 mb-8">
-                    Escolha quanto tempo deseja navegar.
-                </p>
-                <form method="POST" action="{{ route('portal.pagar') }}">
+    <div class="mx-auto max-w-5xl rounded-[2rem] border border-slate-100 bg-white/80 p-8 shadow-[0_20px_80px_-24px_rgba(15,23,42,0.25)] backdrop-blur-xl sm:p-10">
+        <div class="grid gap-4 md:grid-cols-2">
+            @php $planos = [['label' => '1 Hora', 'valor' => 'R$ 3,00', 'color' => 'from-cyan-500 to-cyan-600'], ['label' => '2 Horas', 'valor' => 'R$ 6,00', 'color' => 'from-indigo-500 to-indigo-600'], ['label' => '4 Horas', 'valor' => 'R$ 10,00', 'color' => 'from-amber-500 to-orange-500'], ['label' => '5 Horas', 'valor' => 'R$ 15,00', 'color' => 'from-fuchsia-500 to-purple-600']]; @endphp
+            @foreach($planos as $plano)
+                <form method="POST" action="{{ route('portal.pagar') }}" class="group">
                     @csrf
-                    <input type="hidden" name="plano" value="1 Hora">
-                    <input type="hidden" name="valor" value="3">
-
-                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white p-5 rounded-lg mb-4 text-xl font-bold">
-                        1 Hora - R$ 3,00
+                    <input type="hidden" name="plano" value="{{ $plano['label'] }}">
+                    <input type="hidden" name="valor" value="{{ str_replace(['R$ ', ',00'], ['', ''], $plano['valor']) }}">
+                    <button type="submit" class="flex w-full items-center justify-between rounded-[1.4rem] bg-gradient-to-r {{ $plano['color'] }} p-6 text-left text-white shadow-lg transition hover:-translate-y-1">
+                        <div>
+                            <p class="text-lg font-semibold">{{ $plano['label'] }}</p>
+                            <p class="mt-1 text-sm text-white/80">Acesso rápido para internet</p>
+                        </div>
+                        <span class="text-xl font-semibold">{{ $plano['valor'] }}</span>
                     </button>
                 </form>
-
-                <form method="POST" action="{{ route('portal.pagar') }}">
-                    @csrf
-                    <input type="hidden" name="plano" value="2 Horas">
-                    <input type="hidden" name="valor" value="6">
-
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-lg mb-4 text-xl font-bold">
-                        2 Horas - R$ 6,00
-                    </button>
-                </form>
-                <form method="POST" action="{{ route('portal.pagar') }}">
-                    @csrf
-                    <input type="hidden" name="plano" value="4 Horas">
-                    <input type="hidden" name="valor" value="10">
-
-                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white p-5 rounded-lg mb-4 text-xl font-bold">
-                        4 Horas - R$ 10,00
-                    </button>
-                </form>
-
-                <form method="POST" action="{{ route('portal.pagar') }}">
-                    @csrf
-                    <input type="hidden" name="plano" value="5 Horas">
-                    <input type="hidden" name="valor" value="15">
-
-                    <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white p-5 rounded-lg text-xl font-bold">
-                        5 Horas - R$ 15,00
-                    </button>
-                </form>
-
-            </div>
+            @endforeach
         </div>
     </div>
-
 </x-app-layout>

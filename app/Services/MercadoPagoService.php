@@ -9,21 +9,40 @@ class MercadoPagoService
 {
     public function __construct()
     {
-        MercadoPagoConfig::setAccessToken(env('MERCADOPAGO_ACCESS_TOKEN'));
+        // Prefer ENV, then config/services.php
+        $token = env('MERCADOPAGO_ACCESS_TOKEN') ?: config('services.mercadopago.token');
+
+        if (!is_string($token) || trim($token) === '') {
+            // Throw a clearer exception so developers know how to fix it
+            throw new \RuntimeException("MERCADOPAGO_ACCESS_TOKEN is not configured. Please set MERCADOPAGO_ACCESS_TOKEN in your .env or define services.mercadopago.token in config/services.php.");
+        }
+
+        MercadoPagoConfig::setAccessToken($token);
     }
 
-    public function criarPix($descricao, $valor)
+    /**
+     * Criar pagamento PIX no Mercado Pago
+     *
+     * @param string $descricao
+     * @param float|string $valor
+     * @param string|null $payerEmail
+     * @return mixed
+     */
+    public function criarPix($descricao, $valor, ?string $payerEmail = null)
     {
-    $client = new PaymentClient();
+        $client = new PaymentClient();
 
-    return $client->create([
-        "transaction_amount" => (float) $valor,
-        "description" => $descricao,
-        "payment_method_id" => "pix",
-        "payer" => [
-            "email" => "cliente@minhanet.com.br"
-        ],
-        "notification_url" => "https://exploration-billion-tables-important.trycloudflare.com/webhook/mercadopago"
-    ]);
-}
+        $payload = [
+            "transaction_amount" => (float) $valor,
+            "description" => $descricao,
+            "payment_method_id" => "pix",
+            "payer" => [
+                "email" => $payerEmail ?? 'cliente@minhanet.com.br'
+            ],
+            // Allow notification URL to be configured via .env
+            "notification_url" => env('MERCADOPAGO_NOTIFICATION_URL', config('services.mercadopago.notification_url'))
+        ];
+
+        return $client->create($payload);
+    }
 }
