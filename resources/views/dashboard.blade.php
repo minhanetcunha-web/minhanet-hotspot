@@ -15,30 +15,24 @@
     </x-slot>
 
     @php
-        use Illuminate\Support\Facades\Schema;
-        use Illuminate\Support\Facades\DB;
-        use App\Models\Cliente;
-        use App\Models\Hotspot;
-        use App\Models\Pagamento;
-
         // Safe counts with fallbacks
         try {
-            $clientesCount = Cliente::count();
+            $clientesCount = \App\Models\Cliente::count();
         } catch (\Throwable $e) {
             $clientesCount = 0;
         }
 
         try {
-            $mikrotiksCount = Hotspot::count();
+            $mikrotiksCount = \App\Models\Hotspot::count();
         } catch (\Throwable $e) {
             $mikrotiksCount = 0;
         }
 
         // Clientes conectados: try common 'status' values if column exists
         $clientesConectados = 0;
-        if (Schema::hasTable('clientes') && Schema::hasColumn('clientes', 'status')) {
+        if (\Illuminate\Support\Facades\Schema::hasTable('clientes') && \Illuminate\Support\Facades\Schema::hasColumn('clientes', 'status')) {
             try {
-                $clientesConectados = Cliente::whereIn('status', ['conectado','conectados','online','ativo','connected','online'])->count();
+                $clientesConectados = \App\Models\Cliente::whereIn('status', ['conectado','conectados','online','ativo','connected','online'])->count();
             } catch (\Throwable $e) {
                 $clientesConectados = 0;
             }
@@ -46,29 +40,29 @@
 
         // Usuários RADIUS ativos: try some common tables
         $radiusActive = 0;
-        if (Schema::hasTable('radcheck')) {
-            $radiusActive = DB::table('radcheck')->count();
-        } elseif (Schema::hasTable('radius_users')) {
-            $radiusActive = DB::table('radius_users')->count();
-        } elseif (Schema::hasTable('radacct')) {
-            $radiusActive = DB::table('radacct')->whereNull('acctstoptime')->count();
+        if (\Illuminate\Support\Facades\Schema::hasTable('radcheck')) {
+            $radiusActive = \Illuminate\Support\Facades\DB::table('radcheck')->count();
+        } elseif (\Illuminate\Support\Facades\Schema::hasTable('radius_users')) {
+            $radiusActive = \Illuminate\Support\Facades\DB::table('radius_users')->count();
+        } elseif (\Illuminate\Support\Facades\Schema::hasTable('radacct')) {
+            $radiusActive = \Illuminate\Support\Facades\DB::table('radacct')->whereNull('acctstoptime')->count();
         }
 
         // Receita do dia / mês
         $receitaDia = 0;
         $receitaMes = 0;
-        if (Schema::hasTable('pagamentos')) {
+        if (\Illuminate\Support\Facades\Schema::hasTable('pagamentos')) {
             try {
-                $receitaDia = (float) DB::table('pagamentos')->whereDate('created_at', now()->toDateString())->sum('valor');
-                $receitaMes = (float) DB::table('pagamentos')->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->sum('valor');
+                $receitaDia = (float) \Illuminate\Support\Facades\DB::table('pagamentos')->whereDate('created_at', now()->toDateString())->sum('valor');
+                $receitaMes = (float) \Illuminate\Support\Facades\DB::table('pagamentos')->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->sum('valor');
             } catch (\Throwable $e) {
                 $receitaDia = 0;
                 $receitaMes = 0;
             }
         } else {
             try {
-                $receitaDia = Pagamento::whereDate('created_at', now()->toDateString())->sum('valor');
-                $receitaMes = Pagamento::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->sum('valor');
+                $receitaDia = \App\Models\Pagamento::whereDate('created_at', now()->toDateString())->sum('valor');
+                $receitaMes = \App\Models\Pagamento::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->sum('valor');
             } catch (\Throwable $e) {
                 $receitaDia = 0;
                 $receitaMes = 0;
@@ -78,18 +72,18 @@
         // Pagamentos pendentes / aprovados
         $pagamentosPendentes = 0;
         $pagamentosAprovados = 0;
-        if (Schema::hasTable('pagamentos')) {
+        if (\Illuminate\Support\Facades\Schema::hasTable('pagamentos')) {
             try {
-                $pagamentosPendentes = DB::table('pagamentos')->whereIn('status', ['pendente','pending','aguardando'])->count();
-                $pagamentosAprovados = DB::table('pagamentos')->whereIn('status', ['aprovado','approved','paid'])->count();
+                $pagamentosPendentes = \Illuminate\Support\Facades\DB::table('pagamentos')->whereIn('status', ['pendente','pending','aguardando'])->count();
+                $pagamentosAprovados = \Illuminate\Support\Facades\DB::table('pagamentos')->whereIn('status', ['aprovado','approved','paid'])->count();
             } catch (\Throwable $e) {
                 $pagamentosPendentes = 0;
                 $pagamentosAprovados = 0;
             }
         } else {
             try {
-                $pagamentosPendentes = Pagamento::whereIn('status', ['pendente','pending','aguardando'])->count();
-                $pagamentosAprovados = Pagamento::whereIn('status', ['aprovado','approved','paid'])->count();
+                $pagamentosPendentes = \App\Models\Pagamento::whereIn('status', ['pendente','pending','aguardando'])->count();
+                $pagamentosAprovados = \App\Models\Pagamento::whereIn('status', ['aprovado','approved','paid'])->count();
             } catch (\Throwable $e) {
                 $pagamentosPendentes = 0;
                 $pagamentosAprovados = 0;
@@ -106,9 +100,9 @@
         }
 
         try {
-            if (Schema::hasTable('pagamentos')) {
-                $rows = DB::table('pagamentos')
-                    ->select(DB::raw("DATE(created_at) as day"), DB::raw('SUM(valor) as total'))
+            if (\Illuminate\Support\Facades\Schema::hasTable('pagamentos')) {
+                $rows = \Illuminate\Support\Facades\DB::table('pagamentos')
+                    ->select(\Illuminate\Support\Facades\DB::raw("DATE(created_at) as day"), \Illuminate\Support\Facades\DB::raw('SUM(valor) as total'))
                     ->where('created_at', '>=', now()->subDays(29))
                     ->groupBy('day')
                     ->orderBy('day')
@@ -120,8 +114,8 @@
                     }
                 }
             } else {
-                $rows = Pagamento::where('created_at', '>=', now()->subDays(29))
-                    ->select(DB::raw("DATE(created_at) as day"), DB::raw('SUM(valor) as total'))
+                $rows = \App\Models\Pagamento::where('created_at', '>=', now()->subDays(29))
+                    ->select(\Illuminate\Support\Facades\DB::raw("DATE(created_at) as day"), \Illuminate\Support\Facades\DB::raw('SUM(valor) as total'))
                     ->groupBy('day')
                     ->get();
                 foreach ($rows as $r) {
@@ -145,9 +139,9 @@
             $connData[$date] = 0;
         }
         try {
-            if (Schema::hasTable('sessions')) {
-                $rows = DB::table('sessions')
-                    ->select(DB::raw("DATE(created_at) as day"), DB::raw('COUNT(*) as total'))
+            if (\Illuminate\Support\Facades\Schema::hasTable('sessions')) {
+                $rows = \Illuminate\Support\Facades\DB::table('sessions')
+                    ->select(\Illuminate\Support\Facades\DB::raw("DATE(created_at) as day"), \Illuminate\Support\Facades\DB::raw('COUNT(*) as total'))
                     ->where('created_at', '>=', now()->subDays(29))
                     ->groupBy('day')
                     ->orderBy('day')
@@ -167,13 +161,13 @@
 
         // Latest items
         try {
-            $lastPayments = Schema::hasTable('pagamentos') ? DB::table('pagamentos')->orderByDesc('created_at')->limit(6)->get() : Pagamento::orderByDesc('created_at')->limit(6)->get();
+            $lastPayments = \Illuminate\Support\Facades\Schema::hasTable('pagamentos') ? \Illuminate\Support\Facades\DB::table('pagamentos')->orderByDesc('created_at')->limit(6)->get() : \App\Models\Pagamento::orderByDesc('created_at')->limit(6)->get();
         } catch (\Throwable $e) {
             $lastPayments = collect();
         }
 
         try {
-            $lastClientes = Schema::hasTable('clientes') ? DB::table('clientes')->orderByDesc('created_at')->limit(6)->get() : Cliente::orderByDesc('created_at')->limit(6)->get();
+            $lastClientes = \Illuminate\Support\Facades\Schema::hasTable('clientes') ? \Illuminate\Support\Facades\DB::table('clientes')->orderByDesc('created_at')->limit(6)->get() : \App\Models\Cliente::orderByDesc('created_at')->limit(6)->get();
         } catch (\Throwable $e) {
             $lastClientes = collect();
         }
