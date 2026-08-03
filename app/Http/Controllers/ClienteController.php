@@ -2,71 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ClienteStoreRequest;
 use App\Models\Cliente;
+use App\Services\ClienteService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-{
-    return view('clientes.index');
-}
+    protected ClienteService $clienteService;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-{
-    return view('clientes.create');
-}
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-{
-    Cliente::create([
-        'nome' => $request->nome,
-        'telefone' => $request->telefone,
-        'plano' => $request->plano,
-        'status' => 'Ativo',
-    ]);
-
-    return redirect()->route('clientes');
-}
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function __construct(ClienteService $clienteService)
     {
-        //
+        $this->clienteService = $clienteService;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function index(): View
     {
-        //
+        $clientes = Cliente::latest()->get();
+
+        return view('clientes.index', compact('clientes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function create(): View
     {
-        //
+        return view('clientes.create');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function store(ClienteStoreRequest $request): RedirectResponse
     {
-        //
+        $this->clienteService->criarCliente($request->validated());
+
+        return redirect()
+            ->route('clientes')
+            ->with('success', 'Cliente cadastrado com sucesso!');
+    }
+
+    public function show(Cliente $cliente): View
+    {
+        return view('clientes.show', compact('cliente'));
+    }
+
+    public function edit(Cliente $cliente): View
+    {
+        return view('clientes.edit', compact('cliente'));
+    }
+
+    public function update(ClienteStoreRequest $request, Cliente $cliente): RedirectResponse
+    {
+        $this->clienteService->atualizarCliente($cliente, $request->validated());
+
+        return redirect()->route('clientes')->with('success', 'Cliente atualizado com sucesso!');
+    }
+
+    public function destroy(Cliente $cliente): RedirectResponse
+    {
+        $cliente->delete();
+
+        return redirect()->route('clientes')->with('success', 'Cliente excluído com sucesso!');
+    }
+
+    public function bloquear(Cliente $cliente): RedirectResponse
+    {
+        $cliente->status = $cliente->status === 'Bloqueado' ? 'Ativo' : 'Bloqueado';
+        $cliente->save();
+
+        return redirect()->route('clientes')->with('success', 'Status do cliente atualizado com sucesso!');
     }
 }
