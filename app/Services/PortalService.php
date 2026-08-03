@@ -13,9 +13,13 @@ class PortalService
         $this->mercadoPagoService = $mercadoPagoService;
     }
 
-    public function criarPagamento(string $plano, float|string $valor): mixed
+    /**
+     * Cria um pagamento usando o serviço MercadoPagoService.
+     * Aceita email do pagador opcional para preencher o payer.email.
+     */
+    public function criarPagamento(string $plano, float|string $valor, ?string $email = null): mixed
     {
-        return $this->mercadoPagoService->criarPix($plano, $valor);
+        return $this->mercadoPagoService->criarPix($plano, $valor, $email);
     }
 
     public function processarWebhook(array $payload): array

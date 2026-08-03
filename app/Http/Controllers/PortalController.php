@@ -62,10 +62,11 @@ class PortalController extends Controller
             'valor' => 'required',
         ]);
 
-        // criar pagamento via service
+        // criar pagamento via service, passando o email do cliente salvo na sessão para o payer
         $pagamento = $this->portalService->criarPagamento(
             (string) $request->plano,
-            (float) $request->valor
+            (float) $request->valor,
+            $customer['email'] ?? null
         );
 
         // passar variável 'pix' para a view porque o template espera $pix
