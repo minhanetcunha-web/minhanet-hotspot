@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HotspotController; // usado como "MikroTik" no menu
+use App\Http\Controllers\MikrotikController;
 use App\Http\Controllers\RadiusController;
 use App\Http\Controllers\PortalAdminController;
 use App\Http\Controllers\PagamentoController;
@@ -28,6 +28,30 @@ Route::post('/clientes', [ClienteController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('clientes.store');
 
+Route::get('/clientes/{cliente}', [ClienteController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('clientes.show');
+
+Route::get('/clientes/{cliente}/editar', [ClienteController::class, 'edit'])
+    ->middleware(['auth', 'verified'])
+    ->name('clientes.edit');
+
+Route::put('/clientes/{cliente}', [ClienteController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('clientes.update');
+
+Route::delete('/clientes/{cliente}', [ClienteController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('clientes.destroy');
+
+Route::post('/clientes/{cliente}/bloquear', [ClienteController::class, 'bloquear'])
+    ->middleware(['auth', 'verified'])
+    ->name('clientes.bloquear');
+
+Route::patch('/clientes/{cliente}/toggle-status', [ClienteController::class, 'bloquear'])
+    ->middleware(['auth', 'verified'])
+    ->name('clientes.toggle-status');
+
 Route::get('/planos', [PlanoController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('planos');
@@ -40,25 +64,53 @@ Route::post('/planos', [PlanoController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('planos.store');
 
-Route::get('/hotspots', [HotspotController::class, 'index'])
+Route::get('/mikrotiks', [MikrotikController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('hotspots');
+    ->name('mikrotiks.index');
 
-Route::get('/hotspots/novo', [HotspotController::class, 'create'])
+Route::get('/mikrotiks/create', [MikrotikController::class, 'create'])
     ->middleware(['auth', 'verified'])
-    ->name('hotspots.novo');
+    ->name('mikrotiks.create');
 
-Route::post('/hotspots', [HotspotController::class, 'store'])
+Route::post('/mikrotiks', [MikrotikController::class, 'store'])
     ->middleware(['auth', 'verified'])
-    ->name('hotspots.store');
+    ->name('mikrotiks.store');
 
-Route::get('/hotspots/{id}/testar', [HotspotController::class, 'testarConexao'])
+Route::get('/mikrotiks/{mikrotik}/edit', [MikrotikController::class, 'edit'])
     ->middleware(['auth', 'verified'])
-    ->name('hotspots.testar');
+    ->name('mikrotiks.edit');
 
-Route::get('/hotspots/{id}/criar-perfis', [HotspotController::class, 'criarPerfis'])
+Route::put('/mikrotiks/{mikrotik}', [MikrotikController::class, 'update'])
     ->middleware(['auth', 'verified'])
-    ->name('hotspots.criarPerfis');
+    ->name('mikrotiks.update');
+
+Route::delete('/mikrotiks/{mikrotik}', [MikrotikController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('mikrotiks.destroy');
+
+Route::post('/mikrotiks/{mikrotik}/test-connection', [MikrotikController::class, 'testConnection'])
+    ->middleware(['auth', 'verified'])
+    ->name('mikrotiks.test-connection');
+
+Route::post('/mikrotiks/{mikrotik}/sync', [MikrotikController::class, 'sync'])
+    ->middleware(['auth', 'verified'])
+    ->name('mikrotiks.sync');
+
+Route::get('/mikrotiks/{mikrotik}/script', [MikrotikController::class, 'script'])
+    ->middleware(['auth', 'verified'])
+    ->name('mikrotiks.script');
+
+Route::get('/hotspots', function () {
+    return redirect()->route('mikrotiks.index');
+})->middleware(['auth', 'verified'])->name('hotspots');
+
+Route::get('/hotspots/novo', function () {
+    return redirect()->route('mikrotiks.create');
+})->middleware(['auth', 'verified'])->name('hotspots.novo');
+
+Route::post('/hotspots', function () {
+    return redirect()->route('mikrotiks.index');
+})->middleware(['auth', 'verified'])->name('hotspots.store');
 
 Route::get('/vouchers', [VoucherController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -72,10 +124,25 @@ Route::post('/vouchers', [VoucherController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('vouchers.store');
 
-// Usuários Radius - aponta para a lista de clientes como placeholder para não alterar funcionalidades
-Route::get('/radius', function () {
-    return redirect()->route('clientes');
-})->middleware(['auth', 'verified'])->name('radius.index');
+Route::get('/radius', [RadiusController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('radius.index');
+
+Route::patch('/radius/{radiusUser}/disconnect', [RadiusController::class, 'disconnect'])
+    ->middleware(['auth', 'verified'])
+    ->name('radius.disconnect');
+
+Route::patch('/radius/{radiusUser}/block', [RadiusController::class, 'block'])
+    ->middleware(['auth', 'verified'])
+    ->name('radius.block');
+
+Route::patch('/radius/{radiusUser}/reactivate', [RadiusController::class, 'reactivate'])
+    ->middleware(['auth', 'verified'])
+    ->name('radius.reactivate');
+
+Route::delete('/radius/{radiusUser}', [RadiusController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('radius.destroy');
 
 // Portais (admin) - redireciona para o portal público por enquanto
 Route::get('/portais', function () {

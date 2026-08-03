@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Services\PortalService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -30,7 +31,18 @@ class PortalController extends Controller
             'contato' => 'nullable|string|max:50',
         ]);
 
-        Session::put('portal_customer', $data);
+        $cliente = Cliente::updateOrCreate(
+            ['email' => $data['email']],
+            [
+                'nome' => $data['nome'],
+                'email' => $data['email'],
+                'telefone' => $data['contato'] ?? null,
+                'plano' => null,
+                'status' => 'Ativo',
+            ]
+        );
+
+        Session::put('portal_customer', $data + ['id' => $cliente->id]);
 
         return redirect()->route('portal.planos');
     }
@@ -43,6 +55,14 @@ class PortalController extends Controller
         // opcional: se não houver cliente, redireciona ao cadastro
         if (! $customer) {
             return redirect()->route('portal.cadastro')->with('warning', 'Por favor, preencha seus dados antes de escolher um plano.');
+        }
+
+        if (isset($customer['id'])) {
+            $cliente = Cliente::find($customer['id']);
+            if ($cliente) {
+                $cliente->last_access_at = now();
+                $cliente->save();
+            }
         }
 
         return view('portal.index', ['customer' => $customer]);
@@ -68,6 +88,14 @@ class PortalController extends Controller
             (float) $request->valor,
             $customer['email'] ?? null
         );
+
+        if (isset($customer['id'])) {
+            $cliente = Cliente::find($customer['id']);
+            if ($cliente) {
+                $cliente->last_access_at = now();
+                $cliente->save();
+            }
+        }
 
         // passar variável 'pix' para a view porque o template espera $pix
         return view('portal.pagamento', [

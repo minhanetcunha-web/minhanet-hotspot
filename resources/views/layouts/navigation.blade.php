@@ -25,7 +25,7 @@
                 <x-nav-link :href="route('radius.index')" :active="request()->routeIs('radius*')">
                     <span class="mr-2">🔐</span> Usuários Radius
                 </x-nav-link>
-                <x-nav-link :href="route('hotspots')" :active="request()->routeIs('hotspots*')">
+                <x-nav-link :href="route('mikrotiks.index')" :active="request()->routeIs('mikrotiks*')">
                     <span class="mr-2">🖧</span> MikroTik
                 </x-nav-link>
                 <x-nav-link :href="route('portais')" :active="request()->routeIs('portais*')">
@@ -79,7 +79,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">Dashboard</x-responsive-nav-link>
             <x-responsive-nav-link :href="route('clientes')" :active="request()->routeIs('clientes*')">Clientes</x-responsive-nav-link>
         <x-responsive-nav-link :href="route('radius.index')" :active="request()->routeIs('radius*')">Usuários Radius</x-responsive-nav-link>
-        <x-responsive-nav-link :href="route('hotspots')" :active="request()->routeIs('hotspots*')">MikroTik</x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('mikrotiks.index')" :active="request()->routeIs('mikrotiks*')">MikroTik</x-responsive-nav-link>
         <x-responsive-nav-link :href="route('portais')" :active="request()->routeIs('portais*')">Portais</x-responsive-nav-link>
         <x-responsive-nav-link :href="route('pagamentos')" :active="request()->routeIs('pagamentos*')">Pagamentos</x-responsive-nav-link>
         <x-responsive-nav-link :href="route('configuracoes')" :active="request()->routeIs('configuracoes*')">Configurações</x-responsive-nav-link>
