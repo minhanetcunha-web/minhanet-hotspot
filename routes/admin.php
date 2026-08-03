@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HotspotController;
+use App\Http\Controllers\HotspotController; // usado como "MikroTik" no menu
+use App\Http\Controllers\RadiusController;
+use App\Http\Controllers\PortalAdminController;
+use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\ConfiguracaoController;
 use App\Http\Controllers\PlanoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VoucherController;
@@ -67,6 +71,26 @@ Route::get('/vouchers/novo', [VoucherController::class, 'create'])
 Route::post('/vouchers', [VoucherController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('vouchers.store');
+
+// Usuários Radius - aponta para a lista de clientes como placeholder para não alterar funcionalidades
+Route::get('/radius', function () {
+    return redirect()->route('clientes');
+})->middleware(['auth', 'verified'])->name('radius.index');
+
+// Portais (admin) - redireciona para o portal público por enquanto
+Route::get('/portais', function () {
+    return redirect()->route('portal');
+})->middleware(['auth', 'verified'])->name('portais');
+
+// Pagamentos - redireciona para a tela de vouchers (placeholder)
+Route::get('/pagamentos', function () {
+    return redirect()->route('vouchers');
+})->middleware(['auth', 'verified'])->name('pagamentos');
+
+// Configurações - mostra dashboard como placeholder
+Route::get('/configuracoes', function () {
+    return redirect()->route('dashboard');
+})->middleware(['auth', 'verified'])->name('configuracoes');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

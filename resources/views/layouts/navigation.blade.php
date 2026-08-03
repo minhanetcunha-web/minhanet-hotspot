@@ -22,14 +22,20 @@
                 <x-nav-link :href="route('clientes')" :active="request()->routeIs('clientes*')">
                     <span class="mr-2">👥</span> Clientes
                 </x-nav-link>
-                <x-nav-link :href="route('planos')" :active="request()->routeIs('planos*')">
-                    <span class="mr-2">📶</span> Planos
+                <x-nav-link :href="route('radius.index')" :active="request()->routeIs('radius*')">
+                    <span class="mr-2">🔐</span> Usuários Radius
                 </x-nav-link>
                 <x-nav-link :href="route('hotspots')" :active="request()->routeIs('hotspots*')">
-                    <span class="mr-2">📡</span> Hotspots
+                    <span class="mr-2">🖧</span> MikroTik
                 </x-nav-link>
-                <x-nav-link :href="route('vouchers')" :active="request()->routeIs('vouchers*')">
-                    <span class="mr-2">🎫</span> Vouchers
+                <x-nav-link :href="route('portais')" :active="request()->routeIs('portais*')">
+                    <span class="mr-2">🌐</span> Portais
+                </x-nav-link>
+                <x-nav-link :href="route('pagamentos')" :active="request()->routeIs('pagamentos*')">
+                    <span class="mr-2">💳</span> Pagamentos
+                </x-nav-link>
+                <x-nav-link :href="route('configuracoes')" :active="request()->routeIs('configuracoes*')">
+                    <span class="mr-2">⚙️</span> Configurações
                 </x-nav-link>
             </div>
 
@@ -72,15 +78,16 @@
         <div class="space-y-1 px-4 py-3">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">Dashboard</x-responsive-nav-link>
             <x-responsive-nav-link :href="route('clientes')" :active="request()->routeIs('clientes*')">Clientes</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('planos')" :active="request()->routeIs('planos*')">Planos</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('hotspots')" :active="request()->routeIs('hotspots*')">Hotspots</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('vouchers')" :active="request()->routeIs('vouchers*')">Vouchers</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('portal')">Portal</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('profile.edit')">Perfil</x-responsive-nav-link>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">Sair</x-responsive-nav-link>
-            </form>
+        <x-responsive-nav-link :href="route('radius.index')" :active="request()->routeIs('radius*')">Usuários Radius</x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('hotspots')" :active="request()->routeIs('hotspots*')">MikroTik</x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('portais')" :active="request()->routeIs('portais*')">Portais</x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('pagamentos')" :active="request()->routeIs('pagamentos*')">Pagamentos</x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('configuracoes')" :active="request()->routeIs('configuracoes*')">Configurações</x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('profile.edit')">Perfil</x-responsive-nav-link>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">Sair</x-responsive-nav-link>
+        </form>
         </div>
     </div>
 </nav>
