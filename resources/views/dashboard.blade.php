@@ -175,114 +175,104 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Include Bootstrap 5 CSS for dashboard components -->
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">Clientes cadastrados</h6>
-                                    <p class="display-6 mb-0">{{ $clientesCount }}</p>
-                                </div>
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 45%, #2563eb 100%);">
+                <div class="card-body p-4 p-lg-5 text-white">
+                    <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+                        <div>
+                            <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-white/10 border border-white/20 mb-3">
+                                <span class="fw-semibold">⚡ Visão geral em tempo real</span>
                             </div>
+                            <h3 class="fw-bold mb-2">Seu negócio em um só painel</h3>
+                            <p class="mb-0 text-white-50">Acompanhe clientes, receitas, pagamentos e conexões com uma experiência mais elegante e profissional.</p>
                         </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">Clientes conectados</h6>
-                                    <p class="display-6 mb-0">{{ $clientesConectados }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">Usuários Radius ativos</h6>
-                                    <p class="display-6 mb-0">{{ $radiusActive }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">MikroTiks cadastradas</h6>
-                                    <p class="display-6 mb-0">{{ $mikrotiksCount }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">Receita do dia</h6>
-                                    <p class="display-6 mb-0">R$ {{ number_format($receitaDia, 2, ',', '.') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">Receita do mês</h6>
-                                    <p class="display-6 mb-0">R$ {{ number_format($receitaMes, 2, ',', '.') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">Pagamentos pendentes</h6>
-                                    <p class="display-6 mb-0">{{ $pagamentosPendentes }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h6 class="card-title">Pagamentos aprovados</h6>
-                                    <p class="display-6 mb-0">{{ $pagamentosAprovados }}</p>
-                                </div>
-                            </div>
+                        <div class="text-lg-end">
+                            <div class="fw-semibold">Hoje</div>
+                            <div class="display-6 fw-bold">R$ {{ number_format($receitaDia, 2, ',', '.') }}</div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="row g-3 mb-4">
+                @php
+                    $stats = [
+                        ['label' => 'Clientes cadastrados', 'value' => $clientesCount, 'icon' => '👥', 'tone' => 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)'],
+                        ['label' => 'Clientes conectados', 'value' => $clientesConectados, 'icon' => '📶', 'tone' => 'linear-gradient(135deg, #10b981 0%, #059669 100%)'],
+                        ['label' => 'Usuários Radius ativos', 'value' => $radiusActive, 'icon' => '🔐', 'tone' => 'linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)'],
+                        ['label' => 'MikroTiks cadastradas', 'value' => $mikrotiksCount, 'icon' => '🖧', 'tone' => 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)'],
+                        ['label' => 'Receita do dia', 'value' => 'R$ ' . number_format($receitaDia, 2, ',', '.'), 'icon' => '💰', 'tone' => 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)'],
+                        ['label' => 'Receita do mês', 'value' => 'R$ ' . number_format($receitaMes, 2, ',', '.'), 'icon' => '📈', 'tone' => 'linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)'],
+                        ['label' => 'Pagamentos pendentes', 'value' => $pagamentosPendentes, 'icon' => '⏳', 'tone' => 'linear-gradient(135deg, #f97316 0%, #dc2626 100%)'],
+                        ['label' => 'Pagamentos aprovados', 'value' => $pagamentosAprovados, 'icon' => '✅', 'tone' => 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'],
+                    ];
+                @endphp
+
+                @foreach($stats as $stat)
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card border-0 shadow-sm rounded-4 h-100" style="background: rgba(255,255,255,0.95);">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="text-muted small fw-semibold">{{ $stat['label'] }}</span>
+                                    <span class="d-inline-flex justify-content-center align-items-center rounded-circle text-white fw-bold" style="width: 44px; height: 44px; background: {{ $stat['tone'] }};">{{ $stat['icon'] }}</span>
+                                </div>
+                                <div class="display-6 fw-bold text-slate-900">{{ $stat['value'] }}</div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
             <div class="row g-4">
                 <div class="col-lg-8">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Vendas - últimos 30 dias</h5>
+                    <div class="card border-0 shadow-sm rounded-4 mb-4">
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h5 class="fw-bold mb-1">Vendas dos últimos 30 dias</h5>
+                                    <p class="text-muted mb-0">Receita consolidada por data</p>
+                                </div>
+                                <span class="badge rounded-pill bg-primary-subtle text-primary">ApexCharts</span>
+                            </div>
                             <div id="sales-chart" style="height: 320px;"></div>
                         </div>
                     </div>
 
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Clientes conectados - últimos 30 dias</h5>
+                    <div class="card border-0 shadow-sm rounded-4 mb-4">
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h5 class="fw-bold mb-1">Clientes conectados</h5>
+                                    <p class="text-muted mb-0">Evolução dos acessos nos últimos 30 dias</p>
+                                </div>
+                                <span class="badge rounded-pill bg-success-subtle text-success">Monitoramento</span>
+                            </div>
                             <div id="connected-chart" style="height: 240px;"></div>
                         </div>
                     </div>
 
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Últimos pagamentos</h5>
-                            <div class="list-group">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h5 class="fw-bold mb-1">Últimos pagamentos</h5>
+                                    <p class="text-muted mb-0">Status e valor mais recentes</p>
+                                </div>
+                                <a href="{{ route('vouchers') }}" class="btn btn-sm btn-outline-primary rounded-pill">Ver tudo</a>
+                            </div>
+                            <div class="list-group list-group-flush">
                                 @forelse($lastPayments as $p)
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="list-group-item px-0 py-3 d-flex justify-content-between align-items-start">
                                         <div>
-                                            <div class="fw-semibold">{{ $p->plano ?? ($p->plan ?? 'Pagamento') }}</div>
-                                            <div class="text-muted small">{{ $p->created_at ?? $p->created_at ?? '' }}</div>
+                                            <div class="fw-semibold text-slate-900">{{ $p->plano ?? ($p->plan ?? 'Pagamento') }}</div>
+                                            <div class="text-muted small">{{ $p->created_at ?? '' }}</div>
                                         </div>
                                         <div class="text-end">
-                                            <div>R$ {{ number_format($p->valor ?? 0, 2, ',', '.') }}</div>
+                                            <div class="fw-semibold text-slate-900">R$ {{ number_format($p->valor ?? 0, 2, ',', '.') }}</div>
                                             <div class="small text-muted">{{ $p->status ?? '' }}</div>
                                         </div>
                                     </div>
                                 @empty
-                                    <div class="list-group-item">Nenhum pagamento recente.</div>
+                                    <div class="list-group-item px-0 py-3 text-muted">Nenhum pagamento recente.</div>
                                 @endforelse
                             </div>
                         </div>
@@ -290,32 +280,42 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Últimos clientes cadastrados</h5>
-                            <div class="list-group">
+                    <div class="card border-0 shadow-sm rounded-4 mb-4">
+                        <div class="card-body p-4 p-lg-5">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div>
+                                    <h5 class="fw-bold mb-1">Últimos clientes</h5>
+                                    <p class="text-muted mb-0">Novos cadastros recentes</p>
+                                </div>
+                                <a href="{{ route('clientes') }}" class="btn btn-sm btn-outline-primary rounded-pill">Abrir</a>
+                            </div>
+                            <div class="list-group list-group-flush">
                                 @forelse($lastClientes as $c)
-                                    <div class="list-group-item">
-                                        <div class="fw-semibold">{{ $c->nome ?? $c->name ?? '—' }}</div>
+                                    <div class="list-group-item px-0 py-3">
+                                        <div class="fw-semibold text-slate-900">{{ $c->nome ?? $c->name ?? '—' }}</div>
                                         <div class="small text-muted">{{ $c->created_at ?? '' }}</div>
                                     </div>
                                 @empty
-                                    <div class="list-group-item">Nenhum cliente recente.</div>
+                                    <div class="list-group-item px-0 py-3 text-muted">Nenhum cliente recente.</div>
                                 @endforelse
                             </div>
                         </div>
                     </div>
 
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Resumo rápido</h5>
-                            <p class="mb-0 text-muted">Use este painel para acompanhar vendas, conexões e pagamentos.</p>
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-4 p-lg-5">
+                            <h5 class="fw-bold mb-3">Resumo rápido</h5>
+                            <p class="text-muted mb-3">Monitore rapidamente o desempenho do seu negócio com métricas claras e atualizadas.</p>
+                            <div class="d-grid gap-2">
+                                <a href="{{ route('clientes') }}" class="btn btn-outline-primary rounded-pill">Gerenciar clientes</a>
+                                <a href="{{ route('hotspots') }}" class="btn btn-outline-secondary rounded-pill">Gerenciar MikroTik</a>
+                                <a href="{{ route('portal') }}" class="btn btn-outline-info rounded-pill">Abrir portal</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ApexCharts and Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -324,8 +324,11 @@
                 const salesData = {!! json_encode($salesSeries) !!};
 
                 const salesOptions = {
-                    chart: { type: 'area', height: 320 },
+                    chart: { type: 'area', height: 320, toolbar: { show: false } },
                     series: [{ name: 'Receita', data: salesData }],
+                    colors: ['#2563eb'],
+                    stroke: { curve: 'smooth', width: 3 },
+                    fill: { type: 'gradient', gradient: { shadeIntensity: 0.2, opacityFrom: 0.7, opacityTo: 0.1 } },
                     xaxis: { categories: salesLabels },
                     yaxis: { labels: { formatter: function (val) { return 'R$ ' + val.toFixed(2); } } },
                     tooltip: { y: { formatter: function (val) { return 'R$ ' + Number(val).toFixed(2); } } }
@@ -338,8 +341,10 @@
                 const connData = {!! json_encode($connSeries) !!};
 
                 const connOptions = {
-                    chart: { type: 'line', height: 240 },
+                    chart: { type: 'line', height: 240, toolbar: { show: false } },
                     series: [{ name: 'Conexões', data: connData }],
+                    colors: ['#10b981'],
+                    stroke: { width: 3, curve: 'smooth' },
                     xaxis: { categories: connLabels }
                 };
 
